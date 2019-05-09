@@ -20,7 +20,7 @@ export default class Login extends Component<Props> {
 
 
         <Text style = {styles.welcome}>
-        	Myapp
+        	App namen to
         </Text>
         	
         	<TextInput 
