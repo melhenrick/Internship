@@ -1,21 +1,97 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
+import { createStackNavigator, createAppContainer} from 'react-navigation'
+import axios from 'axios';
 
 
 type Props = {};
-export default class Signup extends Component<Props> {
+export default class Login extends Component<Props> {
+constructor (props){
+  super(props);
+  state = {
+      fullname: "",
+      email:    "",
+      username: "",
+      password: "",
+      confirmpass: "",
+    }
+}
+
+checkRegister(){
+    const { password, confirmpass, fullname, email, username } = this.state
+    if(password == confirmpass){
+      axios.post('https://virtserver.swaggerhub.com/melhenrick/hesoyam/1.0.0/inventory', {
+        email: "asd"
+      }).then(response=>{
+        console.log(response);
+      }).catch(error=>{
+        console.log(error);
+      })
+     this.props.navigation.navigate('Home')
+    }
+    else  {
+      Alert.alert('Error', 'Username or Password is in Correct', [{
+        text: 'Okay'
+      }])
+    }
+}
   render() {
     return (
       <View style={styles.container}>
+
+
         <Text style = {styles.welcome}>
-          Signup
+          Myapp
         </Text>
-      
-      </View>
+          
+          <TextInput 
+          style = {styles.input}
+                placeholder="Fullname" 
+                onChangeText={text => this.setState({fullname: text})}
+              
+          /> 
+          <TextInput 
+          style = {styles.input}
+                placeholder="Email" 
+                onChangeText={text => this.setState({email: text})}
+                
+          /> 
+          <TextInput 
+          style = {styles.input}
+                placeholder="Username"
+                onChangeText={text => this.setState({username: text})} 
+          /> 
+          <TextInput 
+          style = {styles.input}
+                placeholder="Password" 
+                secureTextEntry = {true}
+                onChangeText={text => this.setState({password: text})}
+          />
+          <TextInput 
+          style = {styles.input}
+                placeholder="Confirm Password"
+                secureTextEntry = {true}
+                onChangeText={text => this.setState({confirmpass: text})}
+          /> 
+         
+          <TouchableOpacity style = {styles.btn} 
+                onPress = {()=> this.checkRegister()}
+              >
+                <Text style = {styles.btntxt}> Sign Up </Text>
+          </TouchableOpacity> 
+      </View>   
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -39,14 +115,17 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
    btnContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center',
     width: "90%"
   },
   btn: {
    backgroundColor: "#01c853",
    padding: 15,
    width: "45%",
+   borderRadius: 25,
+   marginVertical: 10,
   },
   btntxt:{
     fontSize: 18,

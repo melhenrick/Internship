@@ -19,6 +19,7 @@ const AppNavigator = createStackNavigator({
   Details: Details,
   Signup: Signup,
   // Logo: Logo
-});
+  }
+);
 
 export default createAppContainer(AppNavigator);
