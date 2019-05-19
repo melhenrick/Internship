@@ -24,18 +24,23 @@ constructor (props){
       confirmpass: "",
     }
 }
-
 checkRegister(){
     const { password, confirmpass, fullname, email, username } = this.state
-    if(password == confirmpass){
-      axios.post('https://virtserver.swaggerhub.com/melhenrick/hesoyam/1.0.0/inventory', {
-        email: "asd"
-      }).then(response=>{
-        console.log(response);
-      }).catch(error=>{
-        console.log(error);
-      })
-     this.props.navigation.navigate('Home')
+     if(password == confirmpass)
+     {
+      let collection= {}
+      collection.fullname=this.state.fullname,
+      collection.username=this.state.username,
+      collection.email=this.state.emaill,
+      collection.password=this.state.password,
+
+      console.warn(collection);
+
+   // .then(function (response){ 
+   //  console.warn(response);
+   //  })
+    
+     // this.props.navigation.navigate('Home')
     }
     else  {
       Alert.alert('Error', 'Username or Password is in Correct', [{
@@ -46,8 +51,6 @@ checkRegister(){
   render() {
     return (
       <View style={styles.container}>
-
-
         <Text style = {styles.welcome}>
           Myapp
         </Text>

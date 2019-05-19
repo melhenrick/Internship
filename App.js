@@ -13,12 +13,11 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Login from './app/components/Login';
 import Details from './app/components/Details';
 import Signup from './app/components/Signup';
-// import Logo from './app/images/';
+
 const AppNavigator = createStackNavigator({
   Home: Login,
   Details: Details,
   Signup: Signup,
-  // Logo: Logo
   }
 );
 
