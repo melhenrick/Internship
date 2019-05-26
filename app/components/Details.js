@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
-
+import { createStackNavigator, createAppContainer} from 'react-navigation';
 
 type Props = {};
 export default class Details extends Component<Props> {
@@ -9,11 +9,19 @@ export default class Details extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style = {styles.welcome}>
-          Details
+          Hello User!!
         </Text>
-      
+                  <TouchableOpacity style = {styles.btn} 
+                  onPress = {()=> this.props.navigation.navigate('task')}>
+                  <Text style = {styles.btntxt}> Task </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style = {styles.btn} 
+                  onPress = {()=> this.props.navigation.navigate('vlog')}>
+                  <Text style = {styles.btntxt}> Blog </Text>
+                  </TouchableOpacity>
       </View>
-    );
+      );
   }
 }
 
@@ -47,6 +55,8 @@ const styles = StyleSheet.create({
    backgroundColor: "#01c853",
    padding: 15,
    width: "45%",
+   borderRadius: 25,
+   marginVertical: 10,
   },
   btntxt:{
     fontSize: 18,

@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation'
-
+import axios from 'axios';
 
 //type Props = {};
 //export default class Login extends Component<Props> {
@@ -23,16 +23,30 @@ constructor (props){
 }
 
   checkLogin(){
-    const { username, password } = this.state
-    if(username == 'admin' && password == 'admin'){
-    this.props.navigation.navigate('Details')
-    }
-    else  {
-      Alert.alert('Error', 'Username or Password is in Correct', [{
-        text: 'Okay'
-      }])
-    }
-}
+    const { password ,username} = this.state
+    if(username != null && password != null){
+
+     axios({
+        method: 'post',
+        url: 'http://rails-jwt.herokuapp.com/auth/login',
+        data: {
+          username: this.state.username,
+          password: this.state.password,
+        }
+        })
+        .then(res => { 
+          this.props.navigation.navigate('Details')
+        })
+        .catch(err => {
+          console.log(err);
+          Alert.alert("Error","Unauthorize");
+        });
+         
+   }
+   else{
+    Alert.alert('error','please complete')
+   }
+ }
 
   render() {
     return (
@@ -57,7 +71,7 @@ constructor (props){
                 <Text style = {styles.btntxt}> Login </Text>
               </TouchableOpacity>
 
-                <Text style = {styles.signuptext}>Don't have an account yet?
+                <Text style = {styles.signuptext}>Do not have an account yet?
                 </Text>
                   <TouchableOpacity style = {styles.signupbtn} 
                   onPress = {()=> this.props.navigation.navigate('Signup')}>

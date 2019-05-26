@@ -17,50 +17,64 @@ export default class Login extends Component<Props> {
 constructor (props){
   super(props);
   state = {
-      fullname: "",
-      email:    "",
+      name: "",
+      lastname: "",
       username: "",
+      email:    "",
       password: "",
       confirmpass: "",
     }
 }
 checkRegister(){
-    const { password, confirmpass, fullname, email, username } = this.state
+    const { password, confirmpass, name, lastname, email, username } = this.state
      if(password == confirmpass)
-     {
-      let collection= {}
-      collection.fullname=this.state.fullname,
-      collection.username=this.state.username,
-      collection.email=this.state.emaill,
-      collection.password=this.state.password,
-
-      console.warn(collection);
-
-   // .then(function (response){ 
-   //  console.warn(response);
-   //  })
-    
-     // this.props.navigation.navigate('Home')
-    }
-    else  {
-      Alert.alert('Error', 'Username or Password is in Correct', [{
+        {
+          if(username != null && name != null && email != null && password != null)
+        {
+         
+      axios.post('http://rails-jwt.herokuapp.com/users', {
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password,
+          })
+          .then(res => { 
+            console.log(res);
+            this.props.navigation.navigate('Home')
+          })
+          .catch(err => {
+            console.log(err);
+            Alert.alert("Error","Password must be minimum of 6 characters \nEmail is invalid \nUsername taken");
+        });
+         
+      }
+          else  
+          {
+          Alert.alert('Error', 'Please fill all the information', [{
         text: 'Okay'
-      }])
-    }
-}
+          }])
+          }
+        }
+    else  {
+      Alert.alert('Error', 'Password is not match', [{
+        text: 'Okay'
+          }])
+          }
+        }
   render() {
     return (
       <View style={styles.container}>
         <Text style = {styles.welcome}>
           Myapp
         </Text>
-          
           <TextInput 
           style = {styles.input}
-                placeholder="Fullname" 
-                onChangeText={text => this.setState({fullname: text})}
+                placeholder="Name" 
+                onChangeText={text => this.setState({name: text})}
               
           /> 
+          
           <TextInput 
           style = {styles.input}
                 placeholder="Email" 
@@ -74,10 +88,10 @@ checkRegister(){
           /> 
           <TextInput 
           style = {styles.input}
-                placeholder="Password" 
+                placeholder="Password"
                 secureTextEntry = {true}
                 onChangeText={text => this.setState({password: text})}
-          />
+          /> 
           <TextInput 
           style = {styles.input}
                 placeholder="Confirm Password"
@@ -94,7 +108,6 @@ checkRegister(){
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
