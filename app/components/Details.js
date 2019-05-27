@@ -1,13 +1,15 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
-import { createStackNavigator, createAppContainer} from 'react-navigation';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions} from 'react-native';
+import { createStackNavigator, createAppContainer, DrawerNavigator} from 'react-navigation';
+//import {Ionicons} from '@expo/vector-icons'
 
 type Props = {};
 export default class Details extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
+       
         <Text style = {styles.welcome}>
           Hello User!!
         </Text>
@@ -20,6 +22,12 @@ export default class Details extends Component<Props> {
                   onPress = {()=> this.props.navigation.navigate('vlog')}>
                   <Text style = {styles.btntxt}> Blog </Text>
                   </TouchableOpacity>
+
+                  <TouchableOpacity style = {styles.logout} 
+                  onPress = {()=> this.props.navigation.navigate('Home')}>
+                  <Text style = {styles.btntxt}> Logout </Text>
+                  </TouchableOpacity>
+                  
       </View>
       );
   }
@@ -61,5 +69,16 @@ const styles = StyleSheet.create({
   btntxt:{
     fontSize: 18,
     textAlign: "center"
+  },
+  logout:{
+    position: 'absolute',
+    top: 40,
+    right: 20,
+  },
+  menuIcon:{
+    zIndex: 9,
+    position: 'absolute',
+    top: 40,
+    left: 20,
   },
 });

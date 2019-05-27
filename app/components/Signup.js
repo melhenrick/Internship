@@ -45,7 +45,7 @@ checkRegister(){
           })
           .catch(err => {
             console.log(err);
-            Alert.alert("Error","Password must be minimum of 6 characters \nEmail is invalid \nUsername taken");
+            Alert.alert("Error","Password must be minimum of 6 characters \nEmail is invalid\nUsername taken\n Check your connection ");
         });
          
       }
@@ -102,8 +102,14 @@ checkRegister(){
           <TouchableOpacity style = {styles.btn} 
                 onPress = {()=> this.checkRegister()}
               >
-                <Text style = {styles.btntxt}> Sign Up </Text>
-          </TouchableOpacity> 
+              <Text style = {styles.btntxt}> Sign Up </Text>
+          </TouchableOpacity>
+          <Text style = {styles.signuptext}>Already have an account?
+                </Text>
+                  <TouchableOpacity style = {styles.signupbtn} 
+                  onPress = {()=> this.props.navigation.navigate('Home')}>
+                  <Text style = {styles.signupbtn}> Sign In </Text>
+                  </TouchableOpacity> 
       </View>   
     );
   }
@@ -146,5 +152,14 @@ const styles = StyleSheet.create({
   btntxt:{
     fontSize: 18,
     textAlign: "center"
+  },
+   signuptext:{
+    fontSize: 20,
+    flexDirection: 'row',
+  },
+  signupbtn:{
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: '500'
   },
 });

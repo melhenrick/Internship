@@ -60,7 +60,10 @@ else{
               >
                 <Text style = {styles.btntxt}> Save </Text>
               </TouchableOpacity>
-           
+           <TouchableOpacity style = {styles.logout} 
+                  onPress = {()=> this.props.navigation.navigate('Details')}>
+                  <Text style = {styles.btntxt}> Back </Text>
+                  </TouchableOpacity>
 
       </View>
     );
@@ -110,5 +113,10 @@ const styles = StyleSheet.create({
   btntxt:{
     fontSize: 18,
     textAlign: "center"
+  },
+  logout:{
+    position: 'absolute',
+    top: 40,
+    left: 20,
   },
 });

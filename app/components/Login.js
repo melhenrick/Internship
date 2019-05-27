@@ -39,12 +39,12 @@ constructor (props){
         })
         .catch(err => {
           console.log(err);
-          Alert.alert("Error","Unauthorize");
+          Alert.alert("Error","Unauthorize or \nCheck your network connection");
         });
          
    }
    else{
-    Alert.alert('error','please complete')
+    Alert.alert('error','please fill all')
    }
  }
 

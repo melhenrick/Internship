@@ -22,7 +22,13 @@ const AppNavigator = createStackNavigator({
   Signup: Signup,
   vlog: vlog,
   task: task,
+  },
+  {
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
   }
+ }
 );
 
 export default createAppContainer(AppNavigator);
