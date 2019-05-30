@@ -1,3 +1,0 @@
-# Internship
-Internship Project
-....
