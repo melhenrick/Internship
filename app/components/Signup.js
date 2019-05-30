@@ -40,7 +40,7 @@ checkRegister(){
           if(username != null && name != null && email != null && password != null)
         {
          
-      axios.post('http://rails-jwt.herokuapp.com/users', {
+      axios.post('http://apizxc.herokuapp.com/users', {
             name: this.state.name,
             username: this.state.username,
             email: this.state.email,

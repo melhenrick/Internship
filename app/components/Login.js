@@ -30,7 +30,7 @@ constructor (props){
 
      axios({
         method: 'post',
-        url: 'http://rails-jwt.herokuapp.com/auth/login',
+        url: 'https://apizxc.herokuapp.com/auth/login',
         data: {
           username: this.state.username,
           password: this.state.password,
