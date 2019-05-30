@@ -8,20 +8,27 @@
 
 import React, {Component} from 'react';
 import { View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer ,createDrawerNavigator} from "react-navigation";
 
 import Login from './app/components/Login';
 import Details from './app/components/Details';
 import Signup from './app/components/Signup';
-import vlog from './app/components/vlog';
+import blog from './app/components/blog';
 import task from './app/components/task';
+import ViewTask from './app/components/ViewTasks';
+import ViewBlog from './app/components/ViewBlog';
+import Acc from './app/components/Acc';
 
 const AppNavigator = createStackNavigator({
-  Home: Login,
+  // Home: Login,
   Details: Details,
   Signup: Signup,
-  vlog: vlog,
+  blog: blog,
   task: task,
+  ViewTask: ViewTask,
+  ViewBlog: ViewBlog,
+  Acc: Acc
+
   },
   {
   headerMode: 'none',
@@ -29,6 +36,7 @@ const AppNavigator = createStackNavigator({
     headerVisible: false,
   }
  }
-);
+)
+
 
 export default createAppContainer(AppNavigator);

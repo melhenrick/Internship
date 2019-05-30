@@ -1,12 +1,15 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import axios from 'axios';
 
 type Props = {};
 export default class Details extends Component<Props> {
-
+state = {
+      name: "",
+      description: "",
+    }
   constructor (props){
   super(props);
   state = {
@@ -17,17 +20,26 @@ export default class Details extends Component<Props> {
 save(){
 
   const {name, description}=this.state
-  if(name != null || description != null){
+  if(name != null && description != null){
   axios({
         method: 'post',
-        url: 'https://rails-jwt.herokuapp.com/Tasks',
+        url: 'https://rails-jwt.herokuapp.com/tasks',
+        headers: {
+                    'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNTU5MDk4NTAzfQ.osRLve5yEdrldYcLMF67N015tOPDoIj3cdlL60zEYGo'
+                },
         data: {
           name: this.state.name,
           description: this.state.description,
     }
-  }
-);
-    this.props.navigation.navigate('Details') 
+    })
+        .then(res => { 
+          this.props.navigation.navigate('Details')
+        })
+        .catch(err => {
+          console.log(err);
+          Alert.alert("Error",err+"\nFields must not be null");
+        });
+     
 }
 else{
   Alert.alert('Error','Fields must not be null');
@@ -38,7 +50,7 @@ else{
     return (
       <View style={styles.container}>
         <Text style = {styles.welcome}>
-          hello we are on task
+          Task
         </Text>
         <TextInput 
           style = {styles.input}
@@ -56,10 +68,10 @@ else{
                 <Text style = {styles.btntxt}> Save </Text>
               </TouchableOpacity>
            <TouchableOpacity style = {styles.logout} 
-                  onPress = {()=> this.props.navigation.navigate('Details')}>
+                  onPress = {()=> this.props.navigation.navigate('ViewTask')}>
                   <Text style = {styles.btntxt}> Back </Text>
                   </TouchableOpacity>
-
+            
       </View>
     );
   }

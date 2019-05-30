@@ -14,6 +14,14 @@ import axios from 'axios';
 
 type Props = {};
 export default class Login extends Component<Props> {
+    state = {
+      name: "",
+      lastname: "",
+      username: "",
+      email:    "",
+      password: "",
+      confirmpass: "",
+    }
 constructor (props){
   super(props);
   state = {
@@ -26,7 +34,7 @@ constructor (props){
     }
 }
 checkRegister(){
-    const { password, confirmpass, name, lastname, email, username } = this.state
+    const { password, confirmpass, name, email, username } = this.state
      if(password == confirmpass)
         {
           if(username != null && name != null && email != null && password != null)
@@ -41,11 +49,12 @@ checkRegister(){
           })
           .then(res => { 
             console.log(res);
+             Alert.alert("Successfully","\nRegistered" );
             this.props.navigation.navigate('Home')
           })
           .catch(err => {
             console.log(err);
-            Alert.alert("Error","Password must be minimum of 6 characters \nEmail is invalid\nUsername taken\n Check your connection ");
+            Alert.alert("Error",err+ "\nPassword must be minimum of 6 characters \nEmail is invalid\nUsername taken\n Check your connection ");
         });
          
       }

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "native-base": "^2.12.1",
     "react": "16.8.6",
     "react-native": "0.59.7",
     "react-native-gesture-handler": "^1.2.1",

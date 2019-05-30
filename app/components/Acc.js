@@ -9,37 +9,21 @@ import {StyleSheet,
 
 type Props = {};
 export default class Details extends Component<Props> {
-
   render() {
     return (
       <View style={styles.container}>
         <Text style = {styles.welcome}>
-          Hello User!!
+          Hello Acc!!
         </Text>
-                  <TouchableOpacity style = {styles.btn} 
-                  onPress = {()=> this.props.navigation.navigate('ViewTask')}>
-                  <Text style = {styles.btntxt}> Task </Text>
+         <TouchableOpacity style = {styles.back} 
+                  onPress = {()=> this.props.navigation.navigate('Details')}>
+                  <Text style = {styles.btntxt}> Back </Text>
                   </TouchableOpacity>
-
-                  <TouchableOpacity style = {styles.btn} 
-                  onPress = {()=> this.props.navigation.navigate('ViewBlog')}>
-                  <Text style = {styles.btntxt}> Blog </Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity style = {styles.logout} 
-                  onPress = {()=> this.props.navigation.navigate('Home')}>
-                  <Text style = {styles.btntxt}> Logout </Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity style = {styles.viewacc} 
-                  onPress = {()=> this.props.navigation.navigate('Acc')}>
-                  <Text style = {styles.btntxt}> View Account </Text>
-                  </TouchableOpacity>
-                  
       </View>
       );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -78,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center"
   },
-  logout:{
+  back:{
     position: 'absolute',
     top: 40,
     right: 20,

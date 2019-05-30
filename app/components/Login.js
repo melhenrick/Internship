@@ -11,9 +11,11 @@ import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 
 import { createStackNavigator, createAppContainer} from 'react-navigation'
 import axios from 'axios';
 
-//type Props = {};
-//export default class Login extends Component<Props> {
 export default class Login extends Component {
+  state = {
+          email: "",
+          password: ""
+       }
 constructor (props){
   super(props);
   state = {
@@ -35,16 +37,18 @@ constructor (props){
         }
         })
         .then(res => { 
+          console.log(res);
+          Alert.alert("Successfully","\nLogin Authorize" );
           this.props.navigation.navigate('Details')
         })
         .catch(err => {
           console.log(err);
-          Alert.alert("Error","Unauthorize or \nCheck your network connection");
+          Alert.alert("Error", err+ "\nUnauthorize" );
         });
          
    }
    else{
-    Alert.alert('error','please fill all')
+    Alert.alert('Error','Please fill all')
    }
  }
 
