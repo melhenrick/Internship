@@ -1,18 +1,16 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, AsyncStorage} from 'react-native';
 
 
 type Props = {};
-export default class Details extends Component<Props> {
+export default class ViewBlog extends Component<Props> {
 
   constructor (props){
   super(props);
   
 }
-view(){
-  Alert.alert('Error','Fields must not be null');
-}
+
   render() {
     return (
       <View style={styles.container}>
@@ -21,8 +19,8 @@ view(){
       </Text>
         
         <TouchableOpacity style = {styles.btn} 
-        onPress = {()=> this.view()}>
-        <Text style = {styles.btntxt}> View Task 
+         onPress = {()=> this.props.navigation.navigate('DisplayBlog')}>
+        <Text style = {styles.btntxt}> View Blog
         </Text>
         
         </TouchableOpacity>

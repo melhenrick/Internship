@@ -5,19 +5,43 @@ import {StyleSheet,
         View, 
         TextInput, 
         TouchableOpacity, 
-        Dimensions} from 'react-native';
+        Dimensions,
+        Alert,
+        AsyncStorage} from 'react-native';
 
 type Props = {};
 export default class Details extends Component<Props> {
 
+
+ constructor(props) {
+    super(props);
+    this._bootstrapAsync();
+  }
+
+_signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Home');
+  };
+
+ _bootstrapAsync = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');  
+   //this.props.navigation.navigate(userToken ? 'Details': 'Home', {userToken});
+   // Alert.alert("success", ""+userToken);
+  };
+
   render() {
+    const { navigation } = this.props;
+    const username = navigation.getParam('username'); 
     return (
       <View style={styles.container}>
+      
         <Text style = {styles.welcome}>
           Hello User!!
+
         </Text>
+
                   <TouchableOpacity style = {styles.btn} 
-                  onPress = {()=> this.props.navigation.navigate('ViewTask')}>
+                  onPress = {()=>  this.props.navigation.navigate('ViewTask')}>
                   <Text style = {styles.btntxt}> Task </Text>
                   </TouchableOpacity>
 
@@ -27,12 +51,15 @@ export default class Details extends Component<Props> {
                   </TouchableOpacity>
 
                   <TouchableOpacity style = {styles.logout} 
-                  onPress = {()=> this.props.navigation.navigate('Home')}>
+                  onPress={this._signOutAsync}>
                   <Text style = {styles.btntxt}> Logout </Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity style = {styles.viewacc} 
-                  onPress = {()=> this.props.navigation.navigate('Acc')}>
+                  onPress = {()=> this.props.navigation.navigate('Acc',{
+                  username
+                  })
+                  }>
                   <Text style = {styles.btntxt}> View Account </Text>
                   </TouchableOpacity>
                   

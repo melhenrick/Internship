@@ -1,11 +1,11 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, AsyncStorage} from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import axios from 'axios';
 
 type Props = {};
-export default class Details extends Component<Props> {
+export default class task extends Component<Props> {
 state = {
       name: "",
       description: "",
@@ -17,15 +17,18 @@ state = {
       description: "",
     }
 }
-save(){
+save = async() => {
+  const userToken = await AsyncStorage.getItem('userToken');  
+  // Alert.alert("success", ""+userToken);
+   
 
   const {name, description}=this.state
   if(name != null && description != null){
   axios({
         method: 'post',
-        url: 'https://rails-jwt.herokuapp.com/tasks',
+        url: 'https://apizxc.herokuapp.com/tasks',
         headers: {
-                    'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNTU5MDk4NTAzfQ.osRLve5yEdrldYcLMF67N015tOPDoIj3cdlL60zEYGo'
+                    'Authorization': userToken
                 },
         data: {
           name: this.state.name,
@@ -33,7 +36,8 @@ save(){
     }
     })
         .then(res => { 
-          this.props.navigation.navigate('Details')
+          Alert.alert("Successfull", "You added new Task");
+          this.props.navigation.navigate('ViewTask')
         })
         .catch(err => {
           console.log(err);
@@ -63,8 +67,7 @@ else{
                 onChangeText={text => this.setState({description: text})}
           /> 
           <TouchableOpacity style = {styles.btn} 
-                  onPress = {()=> this.save()}
-              >
+                 onPress={this.save}>
                 <Text style = {styles.btntxt}> Save </Text>
               </TouchableOpacity>
            <TouchableOpacity style = {styles.logout} 

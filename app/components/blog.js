@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, AsyncStorage} from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import axios from 'axios';
 
@@ -19,15 +19,17 @@ export default class blog extends Component<Props> {
       short_description: ""
     }
 }
-save(){
-
+save = async() => {
+  const userToken = await AsyncStorage.getItem('userToken');  
+  // Alert.alert("success", ""+userToken);
+   
   const {title, content, short_description}=this.state
   if(title != null && content != null && short_description != null){
   axios({
         method: 'post',
-        url: 'https://rails-jwt.herokuapp.com/blogs',
+        url: 'https://apizxc.herokuapp.com/blogs',
          headers: {
-                    'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNTU5MDk4NTAzfQ.osRLve5yEdrldYcLMF67N015tOPDoIj3cdlL60zEYGo'
+                    'Authorization': userToken
                 },
         data: {
           title: this.state.title,
@@ -36,7 +38,8 @@ save(){
     }
     })
         .then(res => { 
-              this.props.navigation.navigate('Details')
+              Alert.alert("Successfull", "You added new Blog");
+              this.props.navigation.navigate('ViewBlog')
             })
             .catch(err => {
               console.log(err);
@@ -70,7 +73,7 @@ else{
                 onChangeText={text => this.setState({short_description: text})}
           /> 
           <TouchableOpacity style = {styles.btn} 
-                  onPress = {()=> this.save()}
+                  onPress={this.save}
               >
                 <Text style = {styles.btntxt}> Save </Text>
               </TouchableOpacity>

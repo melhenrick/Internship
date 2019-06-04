@@ -7,13 +7,13 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, AsyncStorage} from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation'
 import axios from 'axios';
 
 export default class Login extends Component {
   state = {
-          email: "",
+          username: "",
           password: ""
        }
 constructor (props){
@@ -24,7 +24,8 @@ constructor (props){
     }
 }
 
-  checkLogin(){
+
+  checkLogin = async () => {
     const { password ,username} = this.state
     if(username != null && password != null){
 
@@ -38,8 +39,11 @@ constructor (props){
         })
         .then(res => { 
           console.log(res);
-          Alert.alert("Successfully","\nLogin Authorize" );
-          this.props.navigation.navigate('Details')
+          console.log('token',res.data.token)
+          AsyncStorage.setItem('userToken', ''+res.data.token)
+          this.props.navigation.navigate('Details',{
+            username: this.state.username,
+          })
         })
         .catch(err => {
           console.log(err);

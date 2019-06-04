@@ -13,7 +13,7 @@ import axios from 'axios';
 
 
 type Props = {};
-export default class Login extends Component<Props> {
+export default class Signup extends Component<Props> {
     state = {
       name: "",
       lastname: "",

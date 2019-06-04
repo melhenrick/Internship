@@ -1,18 +1,14 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert} from 'react-native';
-
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert, AsyncStorage} from 'react-native';
+import axios from 'axios';
 
 type Props = {};
-export default class Details extends Component<Props> {
+export default class ViewTasks extends Component<Props> {
+  constructor(props) {
+    super(props);
+  }
 
-  constructor (props){
-  super(props);
-  
-}
-view(){
-  Alert.alert('Error','Fields must not be null');
-}
   render() {
     return (
       <View style={styles.container}>
@@ -20,19 +16,23 @@ view(){
           Task
         </Text>
 
-        <TouchableOpacity style = {styles.btn} 
-	     onPress = {()=> this.view()}>
+      <TouchableOpacity style = {styles.btn} 
+	     onPress = {()=> this.props.navigation.navigate('DisplayTask')}>
 	     <Text style = {styles.btntxt}> View Task 
 	     </Text>
 	     </TouchableOpacity>
-    	<TouchableOpacity style = {styles.btn} 
+    	
+      <TouchableOpacity style = {styles.btn} 
 	     onPress = {()=> this.props.navigation.navigate('task')}>
 	     <Text style = {styles.btntxt}> Add Task </Text>
 	     </TouchableOpacity>
-	     <TouchableOpacity style = {styles.back} 
-                  onPress = {()=> this.props.navigation.navigate('Details')}>
-                  <Text style = {styles.btntxt}> Back </Text>
-                  </TouchableOpacity>
+	     
+       <TouchableOpacity style = {styles.back} 
+        onPress = {()=> this.props.navigation.navigate('Details')}>
+        <Text style = {styles.btntxt}> Back </Text>
+        </TouchableOpacity>
+        <Text style = {styles.welcome}>
+        </Text>
       </View>
     );
   }
@@ -41,6 +41,7 @@ view(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1e90ff',
   },

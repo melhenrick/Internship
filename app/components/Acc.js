@@ -5,15 +5,22 @@ import {StyleSheet,
         View, 
         TextInput, 
         TouchableOpacity, 
-        Dimensions} from 'react-native';
+        Dimensions,
+        Alert} from 'react-native';
 
 type Props = {};
-export default class Details extends Component<Props> {
+export default class Acc extends Component<Props> {
   render() {
+    const { navigation } = this.props;
+    const username = navigation.getParam('username', 'user');
+    //Alert.alert("Hello, Welcome",""+username );
     return (
       <View style={styles.container}>
         <Text style = {styles.welcome}>
-          Hello Acc!!
+          Hello Welcome 
+        </Text>
+        <Text style = {styles.welcome}>
+           {JSON.stringify(username)}
         </Text>
          <TouchableOpacity style = {styles.back} 
                   onPress = {()=> this.props.navigation.navigate('Details')}>
